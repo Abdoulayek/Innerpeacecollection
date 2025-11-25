@@ -40,6 +40,34 @@ Discover the art of luxury beauty perfumes, skincare, and timeless elegance that
 - **CSS3**: Modern styling with gradients, animations, and responsive design
 - **JavaScript**: Interactive features and smooth animations
 - **Google Fonts**: Inter font family for typography
+- **Netlify**: Deployment and hosting platform
+
+## 🌐 Deployment
+
+This site is optimized for deployment on **Netlify**:
+
+### Quick Deploy Options:
+
+1. **Deploy from GitHub** (Recommended):
+   - Connect your GitHub repository to Netlify
+   - Automatic deployments on every push to main branch
+   - Custom domain support
+
+2. **Manual Deploy**:
+   - Drag and drop the project folder to Netlify
+   - Instant deployment
+
+### Netlify Configuration:
+- **Build Command**: `echo 'No build step required for static site'`
+- **Publish Directory**: `.` (root directory)
+- **Branch**: `main`
+
+### Features Included:
+- ✅ Security headers configured
+- ✅ Cache optimization for static assets
+- ✅ Custom redirects setup
+- ✅ 404 handling
+- ✅ Performance optimized
 
 ## 📱 Responsive Design
 

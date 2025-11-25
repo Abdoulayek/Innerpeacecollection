@@ -101,7 +101,7 @@ class LinktreeSite {
         }
     }
 
-    trackClick(linkId) {
+    async trackClick(linkId) {
         // Track click in analytics
         if (this.config) {
             const link = this.config.links.find(l => l.id === linkId);
@@ -109,19 +109,41 @@ class LinktreeSite {
                 link.clicks++;
                 this.config.analytics.totalClicks++;
                 
-                const today = new Date().toDateString();
+                // Update daily clicks
+                const today = new Date().toISOString().split('T')[0];
                 if (!this.config.analytics.dailyClicks[today]) {
                     this.config.analytics.dailyClicks[today] = 0;
                 }
                 this.config.analytics.dailyClicks[today]++;
                 
-                // Save to localStorage for admin panel
+                // Update link-specific clicks
+                if (!this.config.analytics.linkClicks[linkId]) {
+                    this.config.analytics.linkClicks[linkId] = 0;
+                }
+                this.config.analytics.linkClicks[linkId]++;
+                
+                // Save updated config to localStorage
                 localStorage.setItem('siteConfig', JSON.stringify(this.config));
                 
-                // Add to recent activity
-                this.addToRecentActivity('Link clicked', link.title, 'click');
+                // Try to save to backend API
+                try {
+                    const response = await fetch('/api/config', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(this.config)
+                    });
+                    
+                    if (response.ok) {
+                        console.log('✅ Analytics updated in backend!');
+                    }
+                } catch (error) {
+                    console.log('⚠️ Could not update backend analytics:', error);
+                }
                 
-                console.log(`Tracked click for: ${link.title}`);
+                // Add to recent activity
+                this.addToRecentActivity(`Link clicked: ${link.title}`);
             }
         }
     }

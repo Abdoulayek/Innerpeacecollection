@@ -80,6 +80,12 @@ class AdminPanel {
             this.saveConfig();
         });
 
+        // Refresh analytics button
+        document.getElementById('refreshAnalyticsBtn').addEventListener('click', () => {
+            this.loadAnalyticsData();
+            this.showNotification('Analytics refreshed!', 'success');
+        });
+
         // Navigation tabs
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -295,6 +301,55 @@ class AdminPanel {
         if (document.querySelector('.tab-content.active')?.id === 'dashboard') {
             this.loadRecentActivity();
         }
+    }
+
+    async loadAnalyticsData() {
+        const analyticsContainer = document.getElementById('analyticsContainer');
+        if (!analyticsContainer) return;
+
+        // Reload config to get latest analytics
+        await this.loadConfig();
+
+        const totalClicks = this.config.analytics.totalClicks || 0;
+        const totalLinks = this.config.links.length;
+        const totalCollections = this.config.collections.length;
+
+        // Calculate today's clicks
+        const today = new Date().toISOString().split('T')[0];
+        const todayClicks = this.config.analytics.dailyClicks[today] || 0;
+
+        analyticsContainer.innerHTML = `
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🔗</div>
+                    <div class="stat-content">
+                        <div class="stat-number">${totalLinks}</div>
+                        <div class="stat-label">Total Links</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📁</div>
+                    <div class="stat-content">
+                        <div class="stat-number">${totalCollections}</div>
+                        <div class="stat-label">Collections</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👆</div>
+                    <div class="stat-content">
+                        <div class="stat-number">${totalClicks}</div>
+                        <div class="stat-label">Total Clicks</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-number">${todayClicks}</div>
+                        <div class="stat-label">Today's Clicks</div>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     loadLinksData() {

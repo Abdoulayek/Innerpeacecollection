@@ -318,6 +318,17 @@ class AdminPanel {
         const today = new Date().toISOString().split('T')[0];
         const todayClicks = this.config.analytics.dailyClicks[today] || 0;
 
+        // Generate link performance table
+        const linkPerformanceHtml = this.config.links.map(link => {
+            const linkClicks = this.config.analytics.linkClicks[link.id] || 0;
+            return `
+                <div class="link-performance-item">
+                    <span class="link-name">${link.title}</span>
+                    <span class="link-clicks">${linkClicks} clicks</span>
+                </div>
+            `;
+        }).join('');
+
         analyticsContainer.innerHTML = `
             <div class="stats-grid">
                 <div class="stat-card">
@@ -347,6 +358,13 @@ class AdminPanel {
                         <div class="stat-number">${todayClicks}</div>
                         <div class="stat-label">Today's Clicks</div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="analytics-section">
+                <h3>📈 Link Performance</h3>
+                <div class="link-performance">
+                    ${linkPerformanceHtml}
                 </div>
             </div>
         `;

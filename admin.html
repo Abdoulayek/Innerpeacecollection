@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Innerpeacecollection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-form">
+            <div class="login-header">
+                <h1>🔐 Admin Panel</h1>
+                <p>Innerpeacecollection Management</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1>✨ Innerpeacecollection Admin</h1>
+                <div class="header-actions">
+                    <button id="syncConfigBtn" class="sync-btn">💾 Sync Config</button>
+                    <span id="currentUser" class="current-user"></span>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <button class="nav-btn active" data-tab="dashboard">📊 Dashboard</button>
+            <button class="nav-btn" data-tab="links">🔗 Links</button>
+            <button class="nav-btn" data-tab="collections">📁 Collections</button>
+            <button class="nav-btn" data-tab="analytics">📈 Analytics</button>
+            <button class="nav-btn" data-tab="users">👥 Users</button>
+            <button class="nav-btn" data-tab="settings">⚙️ Settings</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🔗</div>
+                        <div class="stat-info">
+                            <h3 id="totalLinks">0</h3>
+                            <p>Total Links</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👆</div>
+                        <div class="stat-info">
+                            <h3 id="totalClicks">0</h3>
+                            <p>Total Clicks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📁</div>
+                        <div class="stat-info">
+                            <h3 id="totalCollections">0</h3>
+                            <p>Collections</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Admin Users</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div id="recentActivity" class="activity-list">
+                        <!-- Activity items will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Links Tab -->
+            <div id="links" class="tab-content">
+                <div class="tab-header">
+                    <h2>Manage Links</h2>
+                    <button id="addLinkBtn" class="add-btn">+ Add Link</button>
+                </div>
+                <div id="linksList" class="links-list">
+                    <!-- Links will be populated here -->
+                </div>
+            </div>
+
+            <!-- Collections Tab -->
+            <div id="collections" class="tab-content">
+                <div class="tab-header">
+                    <h2>Manage Collections</h2>
+                    <button id="addCollectionBtn" class="add-btn">+ Add Collection</button>
+                </div>
+                <div id="collectionsList" class="collections-list">
+                    <!-- Collections will be populated here -->
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <div class="tab-header">
+                    <h2>Analytics & Insights</h2>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Link Performance</h3>
+                        <div id="linkPerformance" class="performance-list">
+                            <!-- Link performance data -->
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Daily Clicks</h3>
+                        <div id="dailyClicks" class="daily-stats">
+                            <!-- Daily click stats -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users" class="tab-content">
+                <div class="tab-header">
+                    <h2>Manage Users</h2>
+                    <button id="addUserBtn" class="add-btn">+ Add User</button>
+                </div>
+                <div id="usersList" class="users-list">
+                    <!-- Users will be populated here -->
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <div class="tab-header">
+                    <h2>Site Settings</h2>
+                </div>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label for="siteTitle">Site Title</label>
+                        <input type="text" id="siteTitle" name="siteTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteDescription">Description</label>
+                        <textarea id="siteDescription" name="siteDescription" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileImage">Profile Image URL</label>
+                        <input type="url" id="profileImage" name="profileImage">
+                    </div>
+                    <button id="saveSettingsBtn" class="save-btn">Save Settings</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add/Edit Link Modal -->
+    <div id="linkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="linkModalTitle">Add Link</h3>
+                <span class="close" data-modal="linkModal">&times;</span>
+            </div>
+            <form id="linkForm">
+                <input type="hidden" id="linkId" name="linkId">
+                <div class="form-group">
+                    <label for="linkTitle">Title</label>
+                    <input type="text" id="linkTitle" name="linkTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="linkDescription">Description</label>
+                    <input type="text" id="linkDescription" name="linkDescription">
+                </div>
+                <div class="form-group">
+                    <label for="linkUrl">URL</label>
+                    <input type="url" id="linkUrl" name="linkUrl" required>
+                </div>
+                <div class="form-group">
+                    <label for="linkImage">Image URL (or emoji)</label>
+                    <input type="text" id="linkImage" name="linkImage">
+                </div>
+                <div class="form-group">
+                    <label for="linkCollection">Collection</label>
+                    <select id="linkCollection" name="linkCollection" required>
+                        <!-- Options populated dynamically -->
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" data-modal="linkModal">Cancel</button>
+                    <button type="submit" class="save-btn">Save Link</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Collection Modal -->
+    <div id="collectionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="collectionModalTitle">Add Collection</h3>
+                <span class="close" data-modal="collectionModal">&times;</span>
+            </div>
+            <form id="collectionForm">
+                <input type="hidden" id="collectionId" name="collectionId">
+                <div class="form-group">
+                    <label for="collectionName">Collection Name</label>
+                    <input type="text" id="collectionName" name="collectionName" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" data-modal="collectionModal">Cancel</button>
+                    <button type="submit" class="save-btn">Save Collection</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add User</h3>
+                <span class="close" data-modal="userModal">&times;</span>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername" name="newUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" name="userRole" required>
+                        <option value="admin">Admin</option>
+                        <option value="editor">Editor</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" data-modal="userModal">Cancel</button>
+                    <button type="submit" class="save-btn">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="notification" class="notification"></div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

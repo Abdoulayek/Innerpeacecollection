@@ -1,0 +1,167 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "alama",
+      "password": "Abdidi#25",
+      "role": "admin",
+      "createdAt": "2025-11-25T21:00:00Z"
+    }
+  ],
+  "siteConfig": {
+    "title": "Innerpeacecollection",
+    "description": "Discover the art of luxury beauty perfumes, skincare, and timeless elegance that bring you inner peace. ✨\nShop my favorite finds below 🤍",
+    "profileImage": "https://ugc.production.linktr.ee/4dced3e5-0496-4436-8292-3357b2950197_ab8249e046582b035428bd4d15a31e51.webp?io=true&size=avatar-v3_0"
+  },
+  "socialLinks": [
+    {
+      "id": 1,
+      "platform": "pinterest",
+      "url": "https://www.pinterest.com/innerpeacecollection/",
+      "active": true
+    },
+    {
+      "id": 2,
+      "platform": "facebook",
+      "url": "https://www.facebook.com/profile.php?id=61583675279752",
+      "active": true
+    },
+    {
+      "id": 3,
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@innerpeacollection?_r=1&_t=ZT-91hQJrcjEG7",
+      "active": true
+    }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "name": "Black Friday Products",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": 2,
+      "name": "Special Offers",
+      "active": true,
+      "order": 2
+    }
+  ],
+  "links": [
+    {
+      "id": 1,
+      "title": "Andis Professional Heat Ceramic Press Comb",
+      "description": "450F High Heat with Dual Voltage - 20 Adjustable Heat-Settings",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0BT8KJS9H&btn_ref=org-433bb393e1b8b503",
+      "image": "https://ugc.production.linktr.ee/3da8b220-9b3c-4ef3-90e6-f3a44ddca8d3_31bV-9K3-ZL.-SL500-.jpeg?io=true&size=thumbnail-stack_v1_0",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 1
+    },
+    {
+      "id": 2,
+      "title": "T3 SinglePass Curl X Extra-Long Barrel",
+      "description": "Curling Iron with 9 Heat Settings and Ceramic Barrel",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0CRGTP8P5&btn_ref=org-433bb393e1b8b503",
+      "image": "https://ugc.production.linktr.ee/c3d78f69-29e6-48f2-b502-1a170f7e8412_31UzKobTyfL.-SL500-.jpeg?io=true&size=thumbnail-stack_v1_0",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 2
+    },
+    {
+      "id": 3,
+      "title": "12A Body Wave Bundles Human Hair",
+      "description": "16 18 20 22 Natural Black Color 100% Brazilian Human Hair",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0D6VZV5LQ&btn_ref=org-433bb393e1b8b503",
+      "image": "https://m.media-amazon.com/images/I/51CqmMEudmL._SL500_.jpg",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 3
+    },
+    {
+      "id": 4,
+      "title": "Stainless Steel Half Ball Round Dome Stud Earrings",
+      "description": "High Polished Earring for Women - Multiple Sizes Available",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0CS24JSH1&btn_ref=org-433bb393e1b8b503",
+      "image": "https://m.media-amazon.com/images/I/31dv0nxhY7L._SL500_.jpg",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 4
+    },
+    {
+      "id": 5,
+      "title": "Ariana Grande Cloud Eau de Parfum",
+      "description": "Warm Gourmand Fragrance with Lavender, Coconut, Vanilla & Pear",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2FAriana-Grande-Cloud-Parfum-Spray%2Fdp%2FB07JPZ95ZP&btn_ref=org-433bb393e1b8b503",
+      "image": "https://ugc.production.linktr.ee/2396f559-82ce-47d7-a0c9-61192b034983_31GQ7q4RgBL.-SL500-.jpeg",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 5
+    },
+    {
+      "id": 6,
+      "title": "Sol de Janeiro Cheirosa 62",
+      "description": "Hair & Body Fragrance Mist Travel Size 90mL/3.0 fl oz",
+      "url": "https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2FSOL-JANEIRO-Cheirosa-Hair-Fragrance%2Fdp%2FB09W18N3GT&btn_ref=org-433bb393e1b8b503",
+      "image": "https://ugc.production.linktr.ee/448fd9df-21b1-4c24-9ce5-bcf8a55bd8bf_31rjxer8roL.-SL500-.jpeg",
+      "collectionId": 1,
+      "active": true,
+      "clicks": 0,
+      "order": 6
+    },
+    {
+      "id": 7,
+      "title": "Exclusive Beauty Collection",
+      "description": "Discover our selection of luxury products",
+      "url": "#",
+      "image": "💄",
+      "collectionId": 2,
+      "active": true,
+      "clicks": 0,
+      "order": 1
+    },
+    {
+      "id": 8,
+      "title": "Premium Skincare",
+      "description": "Beauty routine for radiant skin",
+      "url": "#",
+      "image": "🌸",
+      "collectionId": 2,
+      "active": true,
+      "clicks": 0,
+      "order": 2
+    },
+    {
+      "id": 9,
+      "title": "Jewelry & Accessories",
+      "description": "Elegance and refinement for everyday",
+      "url": "#",
+      "image": "💎",
+      "collectionId": 2,
+      "active": true,
+      "clicks": 0,
+      "order": 3
+    },
+    {
+      "id": 11,
+      "title": "Follow us on Facebook",
+      "description": "Join our community for beauty tips and updates",
+      "url": "https://www.facebook.com/profile.php?id=61583675279752",
+      "image": "📘",
+      "collectionId": 2,
+      "active": true,
+      "clicks": 0,
+      "order": 4
+    }
+  ],
+  "analytics": {
+    "totalClicks": 0,
+    "dailyClicks": {},
+    "linkClicks": {}
+  }
+}

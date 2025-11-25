@@ -1,5 +1,151 @@
 // Innerpeacecollection Linktree - Interactive Features
-document.addEventListener('DOMContentLoaded', function() {
+class LinktreeSite {
+    constructor() {
+        this.config = null;
+        this.init();
+    }
+
+    async init() {
+        await this.loadConfig();
+        this.renderSite();
+        this.setupInteractivity();
+    }
+
+    async loadConfig() {
+        try {
+            const response = await fetch('config.json');
+            this.config = await response.json();
+        } catch (error) {
+            console.error('Error loading config:', error);
+            // Fallback to default content if config fails to load
+            this.useDefaultContent();
+        }
+    }
+
+    useDefaultContent() {
+        // Keep existing static content as fallback
+        this.setupInteractivity();
+    }
+
+    renderSite() {
+        if (!this.config) return;
+
+        // Update site title and description
+        document.querySelector('.profile-name').textContent = this.config.siteConfig.title;
+        document.querySelector('.profile-bio').innerHTML = this.config.siteConfig.description.replace(/\n/g, '<br>');
+        
+        // Update profile image
+        const profileImg = document.querySelector('.profile-image img');
+        if (profileImg) {
+            profileImg.src = this.config.siteConfig.profileImage;
+        }
+
+        // Render collections and links
+        this.renderLinks();
+    }
+
+    renderLinks() {
+        const linksContainer = document.querySelector('.links-container');
+        if (!linksContainer) return;
+
+        let html = '';
+
+        // Group links by collection
+        const activeCollections = this.config.collections.filter(c => c.active).sort((a, b) => a.order - b.order);
+        
+        activeCollections.forEach(collection => {
+            const collectionLinks = this.config.links
+                .filter(l => l.collectionId === collection.id && l.active)
+                .sort((a, b) => a.order - b.order);
+
+            if (collectionLinks.length === 0) return;
+
+            // Add collection header
+            html += `
+                <div class="section-header ${collection.id === 2 ? 'special-offers' : ''}">
+                    <h2>${collection.name === 'Special Offers' ? '✨ ' + collection.name + ' ✨' : collection.name}</h2>
+                </div>
+            `;
+
+            // Add links
+            collectionLinks.forEach(link => {
+                const isImage = link.image.startsWith('http');
+                const isSpecial = collection.id === 2;
+                
+                html += `
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" 
+                       class="link-item ${isSpecial ? 'special' : ''}" 
+                       data-link-id="${link.id}"
+                       onclick="linktreeSite.trackClick(${link.id})">
+                        <div class="link-icon">
+                            ${isImage ? 
+                                `<img src="${link.image}" alt="${link.title}" />` : 
+                                `<div class="icon-placeholder">${link.image}</div>`
+                            }
+                        </div>
+                        <div class="link-content">
+                            <h3>${link.title}</h3>
+                            <p>${link.description}</p>
+                        </div>
+                    </a>
+                `;
+            });
+        });
+
+        linksContainer.innerHTML = html;
+        
+        // Hide loading message
+        const loadingMessage = document.querySelector('.loading-message');
+        if (loadingMessage) {
+            loadingMessage.style.display = 'none';
+        }
+    }
+
+    trackClick(linkId) {
+        // Track click in analytics
+        if (this.config) {
+            const link = this.config.links.find(l => l.id === linkId);
+            if (link) {
+                link.clicks++;
+                this.config.analytics.totalClicks++;
+                
+                const today = new Date().toDateString();
+                if (!this.config.analytics.dailyClicks[today]) {
+                    this.config.analytics.dailyClicks[today] = 0;
+                }
+                this.config.analytics.dailyClicks[today]++;
+                
+                // Save to localStorage for admin panel
+                localStorage.setItem('siteConfig', JSON.stringify(this.config));
+                
+                // Add to recent activity
+                this.addToRecentActivity('Link clicked', link.title, 'click');
+                
+                console.log(`Tracked click for: ${link.title}`);
+            }
+        }
+    }
+
+    addToRecentActivity(action, item, type = 'action') {
+        let activities = JSON.parse(localStorage.getItem('recentActivity') || '[]');
+        
+        const newActivity = {
+            action,
+            item,
+            type,
+            timestamp: new Date().toISOString(),
+            time: 'Just now'
+        };
+        
+        activities.unshift(newActivity);
+        
+        // Keep only last 50 activities
+        activities = activities.slice(0, 50);
+        
+        localStorage.setItem('recentActivity', JSON.stringify(activities));
+    }
+
+    setupInteractivity() {
     
     // Add smooth scrolling for better UX
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -200,4 +346,11 @@ document.addEventListener('DOMContentLoaded', function() {
     images.forEach(img => imageObserver.observe(img));
     
     console.log('✨ Innerpeacecollection Linktree loaded successfully! ✨');
-});
+    }
+}
+
+// Initialize the site
+const linktreeSite = new LinktreeSite();
+
+// Make it globally available for onclick handlers
+window.linktreeSite = linktreeSite;
